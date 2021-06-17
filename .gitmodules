@@ -1,0 +1,4 @@
+[submodule "src/react"]
+	path = src/react
+	url = git@github.com:mizri/react.git
+	ignory = dirty
