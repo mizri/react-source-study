@@ -1,0 +1,17 @@
+{
+  "extends": "react-app",
+  "globals": {
+    "spyOnDev": true,
+    "spyOnDevAndProd": true,
+    "spyOnProd": true,
+    "__EXPERIMENTAL__": true,
+    "__EXTENSION__": true,
+    "__PROFILE__": true,
+    "__TEST__": true,
+    "__UMD__": true,
+    "__VARIANT__": true,
+    "__DEV__": true,
+    "gate": true,
+    "trustedTypes": true
+  }
+}
