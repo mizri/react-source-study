@@ -32,7 +32,8 @@ import './index.css';
 // import Demo from './demo/demo26'; // React.useReducer 使用
 // import Demo from './demo/demo27'; // React.useMutableSource 使用
 // import Demo from './demo/demo28'; // React.useMutableSource 使用
-import Demo from './demo/demo29'; // React.useDeferredValue 使用
+// import Demo from './demo/demo29'; // React.useDeferredValue 使用
+import Demo from './demo/demo30'; // React.useDeferredValue 使用
 
 
 // const root = document.getElementById('root');
