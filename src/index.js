@@ -36,12 +36,8 @@ import './index.css';
 import Demo from './demo/demo30'; // React.useDeferredValue 使用
 
 
-// const root = document.getElementById('root');
-// ReactDOM.render(<Demo />, root);
-
-//  这段代码是给demo17用的
-const root = ReactDOM.createRoot(document.getElementById("root"));
-root.render(<Demo />);
+const root = document.getElementById('root');
+ReactDOM.render(<Demo />, root);
 
 
 // If you want to start measuring performance in your app, pass a function
