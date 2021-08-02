@@ -1,0 +1,50 @@
+$border-color: #dfdfdf;
+$color-brand1-6: #17a085;
+
+@mixin loop-grid-row {
+  display: flex;
+  padding: 8px 0;
+  margin: 0;
+
+  > .check {
+    padding: 0 8px;
+  }
+
+  > .text {
+    flex: auto
+  }
+}
+
+.LoopGridContainer {
+  display: flex;
+}
+
+.LoopGridBlock {
+  width: 180px;
+  border: 1px solid $border-color;
+
+  > dt {
+    @include loop-grid-row;
+    background-color: #F7F8FA;
+  }
+
+  > dd {
+    @include loop-grid-row;
+    border-top: 1px solid $border-color;
+    position: relative;
+
+    &.selected {
+      background-color: rgba($color-brand1-6, 0.15);
+
+      &::before {
+        content: ' ';
+        position: absolute;
+        left: -1px;
+        right: -1px;
+        top: 0;
+        bottom: 0;
+        border: 1px solid $color-brand1-6;
+      }
+    }
+  }
+}

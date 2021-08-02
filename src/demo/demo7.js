@@ -1,5 +1,6 @@
-import * as React from 'react';
 
+// React.StrictMode
+import * as React from 'react';
 // 生命周期检测以及副作用
 class Test1 extends React.Component {
   componentWillMount() {

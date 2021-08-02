@@ -1,49 +1,50 @@
 import * as React from 'react';
 
-// function Test1() {
-//   let test1Ref = null;
+function Test1() {
+  let test1Ref = null;
 
-//   React.useEffect(() => {
-//     console.log(test1Ref);
-//   });
+  React.useEffect(() => {
+    console.log(test1Ref);
+  });
 
-//   return (
-//     <div>
-//       <button ref={ins => test1Ref = ins}>我是button1</button>
-//     </div>
-//   )
-// }
+  return (
+    <div>
+      <button ref={ins => test1Ref = ins}>我是button1</button>
+    </div>
+  )
+}
 
-// function Test2(props) {
-//   return (
-//     <div>
-//       <button ref={props.forwardedRef}>我是button2</button>
-//     </div>
-//   )
-// }
+function Test2(props) {
+  return (
+    <div>
+      <button ref={props.forwardedRef}>我是button2</button>
+    </div>
+  )
+}
 
-// const ForwordTest2 = React.forwardRef((props, ref) => {
-//   return <Test2 forwardedRef={ref} />
-// });
+const ForwordTest2 = React.forwardRef((props, ref) => {
+  return <Test2 forwardedRef={ref} />
+});
 
-// export default class App extends React.Component {
+export default class App extends React.Component {
 
-//   componentDidMount() {
-//     console.log(this.test1Ref);
-//     console.log(this.test2Ref);
-//   }
+  componentDidMount() {
+    console.log(this.test1Ref);
+    console.log(this.test2Ref);
+  }
 
-//   render() {
-//     return (
-//       <React.Fragment>
-//         <Test1 ref={ins => this.test1Ref = ins} />
-//         <ForwordTest2 ref={ins => this.test2Ref = ins}/>
-//       </React.Fragment>
-//     )
-//   }
-// }
+  render() {
+    return (
+      <React.Fragment>
+        <Test1 ref={ins => this.test1Ref = ins} />
+        <ForwordTest2 ref={ins => this.test2Ref = ins}/>
+      </React.Fragment>
+    )
+  }
+}
 
-
+//==========================================================================================
+//==========================================================================================
 
 // 我们使用antd button 组件的时候，我们希望希望对其在分装一次
 // 比如假设当前这个是antd的button
@@ -95,7 +96,6 @@ import * as React from 'react';
 // )
 
 
-
 // export default class App extends React.Component {
 //   constructor(props) {
 //     super(props);
@@ -131,60 +131,63 @@ import * as React from 'react';
 // }
 
 
+//==========================================================================================
+//==========================================================================================
+
 // 最后看下高阶组件的例子
-class Button extends React.Component {
-  onClick = (event) => {
-    alert(`我被点击了 ${event.text || ''}`);
-  }
+// class Button extends React.Component {
+//   onClick = (event) => {
+//     alert(`我被点击了 ${event.text || ''}`);
+//   }
 
-  render() {
-    return (
-      <div>
-        <button onClick={this.onClick}>{this.props.children}</button>
-      </div>
-    );
-  }
-}
+//   render() {
+//     return (
+//       <div>
+//         <button onClick={this.onClick}>{this.props.children}</button>
+//       </div>
+//     );
+//   }
+// }
 
-function logProps(WrapperComponent) {
-  class LogProps extends React.Component {
-    componentDidUpdate(prevProps){
-      console.log(prevProps);
-      console.log(this.props);
-    }
+// function logProps(WrapperComponent) {
+//   class LogProps extends React.Component {
+//     componentDidUpdate(prevProps){
+//       console.log(prevProps);
+//       console.log(this.props);
+//     }
   
-    render() {
-      return (
-        <WrapperComponent {...this.props} ref={this.props.forwardRef}>
-          {this.props.children}
-        </WrapperComponent>
-      );
-    }
-  }
+//     render() {
+//       return (
+//         <WrapperComponent {...this.props} ref={this.props.forwardRef}>
+//           {this.props.children}
+//         </WrapperComponent>
+//       );
+//     }
+//   }
 
-  return LogProps;
-}
+//   return LogProps;
+// }
 
-const WrapperButtion = logProps(Button);
+// const WrapperButtion = logProps(Button);
 
-const ForwardWarpperButton = React.forwardRef((props, ref) => {
-  return <WrapperButtion forwardRef={ref}>{props.children}</WrapperButtion>
-});
+// const ForwardWarpperButton = React.forwardRef((props, ref) => {
+//   return <WrapperButtion forwardRef={ref}>{props.children}</WrapperButtion>
+// });
 
-export default class App extends React.Component {
-  componentDidMount() {
-    // 这个输出的是LogProps的实例，无法拿到WrapperComponent的实例
-    console.log(this.button1Ref);
-    // 这个是可以拿到的
-    this.button2Ref.onClick({ text: '222222' });
-  }
+// export default class App extends React.Component {
+//   componentDidMount() {
+//     // 这个输出的是LogProps的实例，无法拿到WrapperComponent的实例
+//     console.log(this.button1Ref);
+//     // 这个是可以拿到的
+//     this.button2Ref.onClick({ text: '222222' });
+//   }
 
-  render() {
-    return (
-      <React.Fragment>
-        <WrapperButtion ref={ins => this.button1Ref = ins} className="button">我是一个高阶组件 button 111111</WrapperButtion>
-        <ForwardWarpperButton ref={ins => this.button2Ref = ins}>我是一个高阶组件 button 22222</ForwardWarpperButton>
-      </React.Fragment>
-    );
-  }
-}
+//   render() {
+//     return (
+//       <React.Fragment>
+//         <WrapperButtion ref={ins => this.button1Ref = ins} className="button">我是一个高阶组件 button 111111</WrapperButtion>
+//         <ForwardWarpperButton ref={ins => this.button2Ref = ins}>我是一个高阶组件 button 22222</ForwardWarpperButton>
+//       </React.Fragment>
+//     );
+//   }
+// }

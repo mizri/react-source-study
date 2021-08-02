@@ -1,4 +1,5 @@
 
+// React.Children.map
 import * as React from 'react';
 
 function Child1(text) {
@@ -37,7 +38,6 @@ function Father(props) {
        {/* 这样回报错 */}
        {/* {
         React.Children.map(props.children, (item) => {
-
           if (React.isValidElement(item)) {
             item.props.text = 'yufeiong'; 
             return item;
@@ -46,13 +46,13 @@ function Father(props) {
           return item;
         })
       } */}
-      {/* 表面上应该达到一样的效果，但实际上是会报错的，这个要后面在说 */}
-      {/* {
+      {/* 表面上应该达到一样的效果，但实际上是会报错的 */}
+      {
         props.children.map((item) => {
-          item.props = { ...item.props, text: 'children' }
+          // item.props = { ...item.props, text: 'children' }
           return item;
         })
-      } */}
+      }
     </div>
   );
 }
@@ -63,7 +63,7 @@ function App() {
     <Father>
       <Child1 />
       <Child2 />
-      12312
+      text
     </Father>
   );
 }

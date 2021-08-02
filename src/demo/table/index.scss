@@ -1,0 +1,325 @@
+// :global {
+  $excel-border-color: #ccc;
+  $excel-table-border: 1px solid $excel-border-color;
+  $excel-table-fixed-bg: #f5f5f5;
+  $color-brand1-6: #17a085;
+  $excel-table-disable-color: #fafafa;
+
+  @mixin excel-fixed-sticky {
+    z-index: 10;
+    position: sticky;
+    left: 0;
+  }
+
+  @mixin excel-fixed-shadow {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: -1px;
+    width: 30px;
+    transform: translateX(100%);
+    transition: box-shadow .3s;
+    content: "";
+    pointer-events: none;
+    box-shadow: inset 10px 0 8px -8px #00000026;
+  }
+
+  @mixin excel-loading() {
+    position: absolute;
+    z-index: 100;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: $excel-table-fixed-bg;
+    opacity: 0.70;
+    padding: 16px;
+  }
+
+  @mixin excel-table-selected-bg($optiacy) {
+    background-color: rgba($color-brand1-6, $optiacy);
+  }
+
+  .ExcelTableFixedMask {
+    background-color: rgba(#aaa, 0.5);
+    display: none;
+    position: fixed;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+
+    &.max {
+      display: block;
+    }
+  }
+
+  .ExcelTableContainer {
+    border: $excel-table-border;
+    position: relative;
+    background-color: #fff;
+
+    &.max {
+      position: fixed;
+      box-shadow: 10px 10px 8px -8px #00000026;
+      left: 12px;
+      right: 12px;
+      top: 12px;
+      z-index: 999;
+    }
+
+    .ExcelTableHeader {
+      overflow: hidden;
+    }
+
+    .ExcelTableBody {
+      overflow: auto;
+      position: relative;
+
+      > .range {
+        position: absolute;
+      }
+
+      &.unselect {
+        user-select: none;
+      }
+    }
+
+    .ExcelTableHeader, .ExcelTableBody {
+      &.isScroll {
+        .FixedColumn {
+          &::after {
+            @include excel-fixed-shadow;
+          }
+        }
+      }
+
+      table {
+        border-collapse: collapse;
+        table-layout: fixed;
+        min-width: 100%;
+
+        > thead {
+          > tr {
+            > th {
+              &.FixedColumn {
+                @include excel-fixed-sticky;
+              }
+
+              // position: relative;
+
+              &:last-child {
+                border-right: none;
+              }
+
+              background-color: $excel-table-fixed-bg;
+            }
+          }
+
+          .subscript {
+            font-size: 12px;
+
+            > .left {
+              position: absolute;
+              z-index: 99;
+              left: 8px;
+              bottom: 8px;
+            }
+
+            > .right {
+              position: absolute;
+              z-index: 99;
+              right: 8px;
+              top: 8px;
+            }
+          }
+        }
+
+        > tbody  {
+          > tr {
+            > td {
+              &.FixedColumn {
+                @include excel-fixed-sticky;
+
+                background-color: $excel-table-fixed-bg;
+              }
+
+              &:last-child {
+                border-right: none;
+              }
+            }
+
+            &:last-child {
+              td {
+                border-bottom: 0;
+              }
+            }
+          }
+        }
+
+        tr {
+          td, th {
+            // position: relative;
+            font-weight: bold;
+            text-align: left;
+            padding: 0;
+            margin: 0;
+            border-right: $excel-table-border;
+            border-bottom: $excel-table-border;
+          }
+        }
+      }
+    }
+
+    .ExcelTableTitle {
+      position: absolute;
+      z-index: 19;
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+
+      > .text {
+        flex: auto;
+        text-align: center;
+        font-weight: bold;
+      }
+    }
+
+    @mixin excel-cell-active {
+      border: 1px solid $color-brand1-6;
+      box-shadow: 0 0 6px $color-brand1-6;
+    }
+    
+    .ExcelTableCell {
+      padding: 4px;
+      height: 100%;
+      border: 1px solid transparent;
+
+      &:hover {
+        @include excel-cell-active;
+      }
+
+      &.active {
+        @include excel-cell-active;
+      }
+
+      &.disabled {
+        background-color: $excel-table-disable-color;
+      }
+
+      &.selected {
+        @include excel-table-selected-bg(0.15);
+
+        > input {
+          @include excel-table-selected-bg(0.05);
+        }
+      }
+
+      &.isCorn {
+        &::before {
+          z-index: 0;
+          display: block;
+          position: absolute;
+          left: 0;
+          top: -1px;
+          content: '';
+          width: 0;
+          height: 0;
+          border-color: transparent $color-brand1-6;
+          border-width: 0 0 8px 8px;
+          border-style: solid;
+        }
+
+        &::afetr {
+          display: block;
+          content: '';
+        }
+      }
+    }
+
+    .ExcelTableNode {
+      &:disabled {
+        background-color: $excel-table-disable-color;
+      }
+
+      border: none;
+      width: 52px;
+      outline: none;
+    }
+
+    .ExcelTableSpin {
+
+      > div {
+        @include excel-loading();
+
+        &.right {
+          right: 0;
+          top: 0;
+          bottom: 0;
+        }
+    
+        &.left {
+          left: 0;
+          top: 0;
+          bottom: 0;
+        }
+    
+        &.top {
+          left: 0;
+          right: 0;
+          top: 0;
+        }
+    
+        &.bottom {
+          left: 0;
+          right: 0;
+          bottom: 0;
+        }
+      }
+
+    }
+
+    @mixin excel-range-postion {
+      position: absolute;
+      z-index: 100;
+      display: none;
+    }
+
+    .ExcelTableRangeBoundTop {
+      display: none;
+      position: absolute;
+
+      &.visible {
+        display: flex;
+        flex-direction: row;
+      }
+
+      > div {
+        text-align: center;
+        flex: auto;
+        color: $color-brand1-6;
+        font-weight: 600;
+      }
+    }
+
+    .ExcelTableRangeBoundLeft {
+      display: none;
+      flex-direction: column;
+      position: absolute;
+
+      &.visible {
+        display: flex;
+        flex-direction: column;
+      }
+
+      > div {
+        flex: auto;
+        line-height: 32px;
+        color: $color-brand1-6;
+        font-weight: 600;
+      }
+    }
+  }
+// }
+
+

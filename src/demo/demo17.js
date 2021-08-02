@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-const defaultList = (new Array(5000)).fill(1).map((num, index) => {
+const defaultList = (new Array(3000)).fill(1).map((num, index) => {
   return {
     value: index,
     key: index,

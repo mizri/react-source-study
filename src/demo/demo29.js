@@ -26,7 +26,7 @@ export default function App() {
   return (
     <React.Fragment>
       <div>
-        <input type="text" onChange={event => React.startTransition(() => setText(event.target.value))} />
+        <input type="text" onChange={event => setText(event.target.value)} />
       </div>
       <Test text={deferredText} />
     </React.Fragment>

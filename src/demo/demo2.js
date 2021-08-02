@@ -1,3 +1,4 @@
+// React.Children.only
 import * as React from 'react';
 
 function Child(text) {

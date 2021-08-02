@@ -1,4 +1,5 @@
 
+// React.PureComponent
 import * as React from 'react';
 
 
@@ -19,6 +20,10 @@ class PureChild extends React.PureComponent {
 class ComplexPureChild extends React.PureComponent {
   static defaultProps = {
     user: {}
+  }
+
+  shouldComponentUpdate(nextProps) {
+    return this.props.user.name !== nextProps.user.name;
   }
 
   render() {

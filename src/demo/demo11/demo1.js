@@ -64,6 +64,8 @@ function ContextLevel3(props) {
 
 const NameContext = React.createContext({ name: 'yufeilong' });
 
+console.log(NameContext);
+
 class ContextLevel4 extends React.Component {
   static contextType = NameContext
   

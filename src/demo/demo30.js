@@ -1,19 +1,14 @@
-import React, {
-  useState,
-  useRef,
-  useImperativeHandle,
-  useCallback
-} from 'react';
+import * as React from 'react';
 
 const FancyInput = React.forwardRef((props, ref) => {
-  const [ fresh, setFresh ] = useState(false)
-  const attRef = useRef(0);
-  useImperativeHandle(ref, () => ({
+  const [ fresh, setFresh ] = React.useState(false)
+  const attRef = React.useRef(0);
+  React.useImperativeHandle(ref, () => ({
     attRef,
     fresh
   }), [ fresh ]);
 
-  const handleClick = useCallback(() => {
+  const handleClick = React.useCallback(() => {
     attRef.current++;
   }, []);
 
@@ -27,7 +22,7 @@ const FancyInput = React.forwardRef((props, ref) => {
 });
 
 export default function App(props) {
-  const fancyInputRef = useRef();
+  const fancyInputRef = React.useRef();
 
   return (
     <div>

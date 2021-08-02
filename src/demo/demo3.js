@@ -1,3 +1,4 @@
+// React.Children.toArray
 import * as React from 'react';
 
 function Child(text) {

@@ -333,11 +333,11 @@ module.exports = function (webpackEnv) {
         'shared': path.resolve(__dirname, '../src/react/packages/shared'),
         'react-reconciler': path.resolve(__dirname, '../src/react/packages/react-reconciler'),
         'react-events': path.resolve(__dirname, '../src/react/packages/events'),
-        // // Allows for better profiling with ReactDevTools
-        // ...(isEnvProductionProfile && {
-        //   'react-dom$': 'react-dom/profiling',
-        //   'scheduler/tracing': 'scheduler/tracing-profiling',
-        // }),
+        // Allows for better profiling with ReactDevTools
+        ...(isEnvProductionProfile && {
+          'react-dom$': 'react-dom/profiling',
+          'scheduler/tracing': 'scheduler/tracing-profiling',
+        }),
         ...(modules.webpackAliases || {}),
       },
       plugins: [

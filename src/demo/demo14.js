@@ -43,6 +43,8 @@ export default class App extends React.Component {
 
     this.test3Ref = { current: null };
     this.test4Ref = React.createRef();
+    
+    console.log( React.createRef());
   }
 
   componentDidMount() {
